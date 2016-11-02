@@ -1,5 +1,4 @@
-#
-# Copyright (C) 2016 The CyanogenMod Project
+# Copyright (C) 2015 The CyanogenMod Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -12,14 +11,18 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-#
 
-$(call inherit-product, device/xiaomi/ido/full_ido.mk)
+# Customized supportfor AW2013 controllers
 
-# Inherit some common CM stuff.
-$(call inherit-product, vendor/cm/config/common_full_phone.mk)
+LOCAL_PATH:= $(call my-dir)
 
-PRODUCT_NAME := cm_ido
-BOARD_VENDOR := Xiaomi
+include $(CLEAR_VARS)
 
-PRODUCT_GMS_CLIENTID_BASE := android-xiaomi
+LOCAL_SRC_FILES := lights-$(BOARD_LIGHTS_VARIANT).c
+LOCAL_MODULE_RELATIVE_PATH    := hw
+LOCAL_SHARED_LIBRARIES := liblog libcutils
+LOCAL_MODULE := lights.$(TARGET_BOARD_PLATFORM)
+LOCAL_MODULE_TAGS := optional
+
+include $(BUILD_SHARED_LIBRARY)
+
